@@ -248,16 +248,18 @@ class sitemapFriend {
       }
 
       $children = $child->get('children');
-
+      
+      // If there is a name of a menu item then "menutitle" else "pagetitle"
+      $menutitle=($child->get('menutitle'))?$child->get('menutitle'):$child->get('pagetitle');
       if ($this->config['parentTitles']) {
         if ($this->config['parentTitlesReversed']) {
-          array_unshift($this->parentTitles, $child->get('pagetitle'));
+          array_unshift($this->parentTitles, $menutitle);
         } else {
-          $this->parentTitles[] = $child->get('pagetitle');
+          $this->parentTitles[] = $menutitle;
         }
         $title = implode($this->config['titleSeparator'], $this->parentTitles);
       } else {
-        $title = $child->get('pagetitle');
+        $title = $menutitle;
       }
 
       $props = array('items' => '');
